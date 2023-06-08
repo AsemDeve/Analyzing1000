@@ -46,14 +46,10 @@ genre_counts_df = pd.DataFrame({'Genre': genre_counts.index, 'Count': genre_coun
 print(genre_counts_df)
 genre_counts_df = genre_counts_df.sort_values('Count', ascending=False)
 
-
-
 director_avg_ratings = brief_df.groupby('Director')['IMDB_Rating'].mean()
 director_ratings_df = pd.DataFrame({'Director': director_avg_ratings.index, 'IMDB_Rating': director_avg_ratings.values})
 director_ratings_df = director_ratings_df.sort_values('IMDB_Rating', ascending=False)
 top_10_directors = director_ratings_df.head(10)
-
-
 
 plt.figure(figsize=(12, 6))
 plt.bar(genre_counts_df['Genre'], genre_counts_df['Count'])
@@ -62,18 +58,14 @@ plt.ylabel('Count')
 plt.title('Most Popular Genres of Movies/TV Shows')
 plt.xticks(rotation=45)
 
-
 plt.figure(figsize=(12, 6))
-plt.bar(top_10_directors['Director'], top_10_directors['IMDB_Rating'])
+bar_plot = plt.bar(top_10_directors['Director'], top_10_directors['IMDB_Rating'])
+plt.bar_label(container=bar_plot, labels=top_10_directors['IMDB_Rating'])
 plt.xlabel('Director')
 plt.ylabel('IMDB Rating')
 plt.title('Top 10 Directors based on IMDB Rating of Movies/TV Shows')
 plt.xticks(rotation=45)
+plt.ylim(bottom=8)
+plt.ylim(top=9)
+
 plt.show()
-
-
-
-
-
-
-
